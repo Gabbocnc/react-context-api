@@ -19,16 +19,11 @@ const initialBlog = [
 function App() {
 
   const [articles, setArticles] = useState(initialBlog)
-  const [newArticle, setNewArticle] = useState({
-    name: '',
-    status: '',
-    image: '',
-    content: '',
-    tags: ''
-  })
+  const [newArticle, setNewArticle] = useState(initialBlog)
   const [searchText, setSearchText] = useState('')
   const [filteredArticles, setFilteredArticles] = useState([])
   const [tagsSelected, setTagsSelected] = useState('')
+
 
 
   useEffect(() => {
@@ -46,13 +41,8 @@ function App() {
     ]
     setArticles(newArticles)
 
-    setNewArticle({
-      name: '',
-      status: '',
-      image: '',
-      content: '',
-      tags: ''
-    })
+
+
   }
 
   function handleTrashTaskClick(e) {
@@ -73,7 +63,6 @@ function App() {
   function hadleSelectedTags(e) {
     setTagsSelected(e.target.value)
   }
-
 
 
 
@@ -104,6 +93,7 @@ function App() {
           </label>
 
           <div className="input-group mb-3">
+
             {/* BLOG NAME */}
             <input
               type="text"
@@ -114,16 +104,7 @@ function App() {
                 setNewArticle({ ...newArticle, name: e.target.value })
               }
             />
-            {/* BLOG CONTENT */}
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Blog Content"
-              value={newArticle.content}
-              onChange={(e) =>
-                setNewArticle({ ...newArticle, content: e.target.value })
-              }
-            />
+
             {/* BLOG IMG */}
             <input
               type="file"
@@ -136,8 +117,9 @@ function App() {
                 setNewArticle({ ...newArticle, image: imageUrl });
               }}
             />
+
             {/* BLOG TAGS */}
-            <div class="input-group input-group-sm mb-3">
+            <div className="input-group input-group-sm mb-3">
               <select
                 className="form-select"
                 value={tagsSelected}
@@ -150,18 +132,35 @@ function App() {
                 <option>Node Express</option>
               </select>
             </div>
-            {/* BLOG STATUS */}
-            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-              <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off" />
-              <label class="btn btn-outline-primary" for="btncheck1">Checkbox 1</label>
 
-              <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off" />
-              <label class="btn btn-outline-primary" for="btncheck2">Checkbox 2</label>
+            {/* Blog Status */}
+            <div className="input-group input-group-sm mb-3">
 
-              <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off" />
-              <label class="btn btn-outline-primary" for="btncheck3">Checkbox 3</label>
+              <select
+                id="status"
+                className="form-select"
+                value={newArticle.status}
+                onChange={(e) =>
+                  setNewArticle({ ...newArticle, status: e.target.value })
+                }
+              >
+                <option value="">Select Status</option>
+                <option value="Draft">Private</option>
+                <option value="Published">Published</option>
+                <option value="Archived">Pending</option>
+              </select>
             </div>
 
+            {/* BLOG CONTENT */}
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Blog Content"
+              value={newArticle.content}
+              onChange={(e) =>
+                setNewArticle({ ...newArticle, content: e.target.value })
+              }
+            />
 
             <button className="btn btn-outline-secondary" type="submit">
               Add Blog
@@ -182,8 +181,9 @@ function App() {
               <h5><strong>Title :</strong> {article.name}</h5>
               <p><strong>Content :</strong> {article.content}</p>
               <p className="text-muted">{article.tags}</p>
-              <p><strong>Tags: </strong>{tagsSelected}</p>
-              <img src={article.image} alt="Blog" style={{ width: "100px" }} />
+              <img src={article.image} style={{ width: "100px" }} />
+              <p><strong>Tags : </strong>{tagsSelected}</p>
+              <p><strong>Status :</strong> {article.status}</p>
             </div>
             <button
               onClick={handleTrashTaskClick}
