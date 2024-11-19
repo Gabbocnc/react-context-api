@@ -6,7 +6,7 @@ const initialBlog = [
   {
     name: '',
     status: '',
-    image: '',
+    image: null,
     content: '',
     tags: ''
   }
@@ -19,7 +19,13 @@ const initialBlog = [
 function App() {
 
   const [articles, setArticles] = useState(initialBlog)
-  const [newArticle, setNewArticle] = useState('')
+  const [newArticle, setNewArticle] = useState({
+    name: '',
+    status: '',
+    image: '',
+    content: '',
+    tags: ''
+  })
   const [searchText, setSearchText] = useState('')
   const [filteredArticles, setFilteredArticles] = useState([])
 
@@ -40,7 +46,13 @@ function App() {
     ]
     setArticles(newArticles)
 
-    setNewArticle('')
+    setNewArticle({
+      name: '',
+      status: '',
+      image: '',
+      content: '',
+      tags: ''
+    })
   }
 
   function handleTrashTaskClick(e) {
@@ -68,93 +80,102 @@ function App() {
 
 
   return (
-    <>
-      <div className="container">
-        <div className="d-flex align-items-center justify-content-between">
-          <h1>My Blog</h1>
+    <div className="container">
+      <div className="d-flex align-items-center justify-content-between">
+        <h1>My Blog</h1>
 
-          <form onSubmit={handleSearchForm}>
-            <div className="mb-3">
-
-              <input
-                type="search"
-                className="form-control"
-                name="searchText"
-                id="searchText"
-                aria-describedby="searchHelper"
-                placeholder=" Search ..."
-                value={searchText}
-                onChange={e => setSearchText(e.target.value)}
-              />
-
-            </div>
-
-          </form>
-
-        </div>
-
-
-        {/* New Blog */}
-
-        <form onSubmit={addArticle}>
+        <form>
           <div className="mb-3">
-            <label htmlFor="task" className="form-label">Blog</label>
+            <input
+              type="search"
+              className="form-control"
+              placeholder="Search..."
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+            />
+          </div>
+        </form>
+      </div>
 
-            <div className="input-group mb-3">
-              <input type="text"
-                className="form-control"
-                placeholder="Add your Blog name"
-                aria-label="Add your Blog name"
-                aria-describedby="button-addon2"
-                value={newArticle.name}
-                onChange={e => setNewArticle(e.target.value)}
-              />
-              <input type="text"
-                className="form-control"
-                placeholder="Add your Blog content"
-                aria-label="Add your Blog content"
-                aria-describedby="button-addon2"
-                value={newArticle.content}
-                onChange={e => setNewArticle(e.target.value)}
-              />
-              <input type="text"
-                className="form-control"
-                placeholder="Add your Blog image"
-                aria-label="Add your Blog image"
-                aria-describedby="button-addon2"
-                value={newArticle.image}
-                onChange={e => setNewArticle(e.target.value)}
-              />
+      {/* New Blog*/}
+      <form onSubmit={addArticle}>
+        <div className="mb-3">
+          <label htmlFor="task" className="form-label">
+            Blog
+          </label>
 
-              <button className="btn btn-outline-secondary" type="submit" id="button-addon2">Button</button>
-            </div>
+          <div className="input-group mb-3">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Blog Name"
+              value={newArticle.name}
+              onChange={(e) =>
+                setNewArticle({ ...newArticle, name: e.target.value })
+              }
+            />
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Blog Content"
+              value={newArticle.content}
+              onChange={(e) =>
+                setNewArticle({ ...newArticle, content: e.target.value })
+              }
+            />
+            <input
+              type="file"
+              className="form-control"
+              placeholder="Image URL"
+              accept='image/*'
+              value={newArticle.image}
+              onChange={(e) =>
+                setNewArticle({ ...newArticle, image: e.target.value })
+              }
+            />
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Blog Tags"
+              value={newArticle.tags}
+              onChange={(e) =>
+                setNewArticle({ ...newArticle, tags: e.target.value })
+              }
+            />
 
-            <small id="taskHelperId" className="form-text text-muted">Type your new Blog</small>
+            <button className="btn btn-outline-secondary" type="submit">
+              Add Blog
+            </button>
           </div>
 
-        </form>
+        </div>
+      </form>
 
-        {/* Blog List */}
-        <ul className="list-group">
-
-          {filteredArticles.map((article, index) =>
-            <li key={index} className="list-group-item d-flex justify-content-between">
-              {article.name}
-              {article.content}
-              {article.image}
-              {article.tags}
-
-
-              <button onClick={handleTrashTaskClick} data-index={index} className='btn btn-danger'>
-                <i className="bi bi-trash"></i>
-              </button>
-            </li>)}
-
-        </ul>
-
-      </div>
-    </>
-  )
+      {/* Blog List */}
+      <ul className="list-group">
+        {filteredArticles.map((article, index) => (
+          <li
+            key={index}
+            className="list-group-item d-flex justify-content-between align-items-center"
+          >
+            <div>
+              <h5>{article.name}</h5>
+              <p>{article.content}</p>
+              <img src={article.image} alt="Blog" style={{ width: "100px" }} />
+              <p className="text-muted">{article.tags}</p>
+            </div>
+            <button
+              onClick={handleTrashTaskClick}
+              data-index={index}
+              className="btn btn-danger"
+            >
+              <i className="bi bi-trash"></i>
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 export default App
