@@ -6,7 +6,7 @@ const initialBlog = [
   {
     name: '',
     status: '',
-    image: null,
+    image: '/img/0.jpg',
     content: '',
     tags: ''
   }
@@ -28,7 +28,7 @@ function App() {
   })
   const [searchText, setSearchText] = useState('')
   const [filteredArticles, setFilteredArticles] = useState([])
-
+  const [tagsSelected, setTagsSelected] = useState('')
 
 
   useEffect(() => {
@@ -70,10 +70,9 @@ function App() {
 
   }
 
-
-
-
-
+  function hadleSelectedTags(e) {
+    setTagsSelected(e.target.value)
+  }
 
 
 
@@ -131,25 +130,36 @@ function App() {
               className="form-control"
               placeholder="Choose your image"
               accept='image/*'
-              value={newArticle.image}
-              onChange={(e) =>
-                setNewArticle({ ...newArticle, image: e.target.files[0] })
-              }
+              onChange={(e) => {
+                const fileImg = e.target.files[0];
+                const imageUrl = fileImg ? URL.createObjectURL(fileImg) : '/img/0.jpg';
+                setNewArticle({ ...newArticle, image: imageUrl });
+              }}
             />
             {/* BLOG TAGS */}
-            <div className="input-group mb-3">
-              <button type="button" className="btn btn-outline-secondary">Action</button>
-              <button type="button" className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                <span className="visually-hidden">Toggle Dropdown</span>
-              </button>
-              <ul className="dropdown-menu">
-                <li><a className="dropdown-item" href="#">Action</a></li>
-                <li><a className="dropdown-item" href="#">Another action</a></li>
-                <li><a className="dropdown-item" href="#">Something else here</a></li>
-                <li><hr className="dropdown-divider" /></li>
-                <li><a className="dropdown-item" href="#">Separated link</a></li>
-              </ul>
-              <input type="text" className="form-control" aria-label="Text input with segmented dropdown button" />
+            <div class="input-group input-group-sm mb-3">
+              <select
+                className="form-select"
+                value={tagsSelected}
+                onChange={hadleSelectedTags}
+              >
+                <option value="" disabled>Choose a Tags</option>
+                <option>HTML</option>
+                <option>CSS</option>
+                <option>JS</option>
+                <option>Node Express</option>
+              </select>
+            </div>
+            {/* BLOG STATUS */}
+            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+              <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off" />
+              <label class="btn btn-outline-primary" for="btncheck1">Checkbox 1</label>
+
+              <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off" />
+              <label class="btn btn-outline-primary" for="btncheck2">Checkbox 2</label>
+
+              <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off" />
+              <label class="btn btn-outline-primary" for="btncheck3">Checkbox 3</label>
             </div>
 
 
@@ -169,10 +179,11 @@ function App() {
             className="list-group-item d-flex justify-content-between align-items-center"
           >
             <div>
-              <h5>{article.name}</h5>
-              <p>{article.content}</p>
-              <img src={article.image} alt="Blog" style={{ width: "100px" }} />
+              <h5><strong>Title :</strong> {article.name}</h5>
+              <p><strong>Content :</strong> {article.content}</p>
               <p className="text-muted">{article.tags}</p>
+              <p><strong>Tags: </strong>{tagsSelected}</p>
+              <img src={article.image} alt="Blog" style={{ width: "100px" }} />
             </div>
             <button
               onClick={handleTrashTaskClick}
