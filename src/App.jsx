@@ -6,7 +6,7 @@ const initialBlog = [
   {
     name: '',
     status: '',
-    image: null,
+    image: '',
     content: '',
     tags: ''
   }
