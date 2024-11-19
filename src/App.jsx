@@ -6,7 +6,7 @@ const initialBlog = [
   {
     name: '',
     status: '',
-    image: '',
+    image: null,
     content: '',
     tags: ''
   }
@@ -133,19 +133,25 @@ function App() {
               accept='image/*'
               value={newArticle.image}
               onChange={(e) =>
-                setNewArticle({ ...newArticle, image: e.target.value })
+                setNewArticle({ ...newArticle, image: e.target.files[0] })
               }
             />
             {/* BLOG TAGS */}
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Blog Tags"
-              value={newArticle.tags}
-              onChange={(e) =>
-                setNewArticle({ ...newArticle, tags: e.target.value })
-              }
-            />
+            <div className="input-group mb-3">
+              <button type="button" className="btn btn-outline-secondary">Action</button>
+              <button type="button" className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                <span className="visually-hidden">Toggle Dropdown</span>
+              </button>
+              <ul className="dropdown-menu">
+                <li><a className="dropdown-item" href="#">Action</a></li>
+                <li><a className="dropdown-item" href="#">Another action</a></li>
+                <li><a className="dropdown-item" href="#">Something else here</a></li>
+                <li><hr className="dropdown-divider" /></li>
+                <li><a className="dropdown-item" href="#">Separated link</a></li>
+              </ul>
+              <input type="text" className="form-control" aria-label="Text input with segmented dropdown button" />
+            </div>
+
 
             <button className="btn btn-outline-secondary" type="submit">
               Add Blog
