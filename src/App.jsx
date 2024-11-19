@@ -105,6 +105,7 @@ function App() {
           </label>
 
           <div className="input-group mb-3">
+            {/* BLOG NAME */}
             <input
               type="text"
               className="form-control"
@@ -114,6 +115,7 @@ function App() {
                 setNewArticle({ ...newArticle, name: e.target.value })
               }
             />
+            {/* BLOG CONTENT */}
             <input
               type="text"
               className="form-control"
@@ -123,16 +125,18 @@ function App() {
                 setNewArticle({ ...newArticle, content: e.target.value })
               }
             />
+            {/* BLOG IMG */}
             <input
               type="file"
               className="form-control"
-              placeholder="Image URL"
+              placeholder="Choose your image"
               accept='image/*'
               value={newArticle.image}
               onChange={(e) =>
                 setNewArticle({ ...newArticle, image: e.target.value })
               }
             />
+            {/* BLOG TAGS */}
             <input
               type="text"
               className="form-control"
