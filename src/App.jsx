@@ -39,7 +39,7 @@ function App() {
 
 
   function fetchDeletePost(slug) {
-    const url = `http://localhost:3004/post/${slug}`;
+    const url = `http://localhost:3004/${slug}`;
 
     fetch(url, {
       method: 'DELETE',
@@ -50,7 +50,7 @@ function App() {
       })
 
       .then(data => {
-        setPostsData(data);
+        setPostsData(data.data);
       })
   }
 
@@ -95,7 +95,7 @@ function App() {
 
 
   return (
-    <div className="container">
+    <div className="container" >
 
       {
         postsData.data ?
@@ -116,7 +116,7 @@ function App() {
                 <div>
                   {data.tags.join(',')}
                 </div>
-                <button onClick={() => fetchDeletePost(data.slug)}>Elimina</button>
+                <button onClick={() => fetchDeletePost(data.slug)}>Delete Post</button>
               </div>
             </div>
 
