@@ -26,6 +26,20 @@ function App() {
   const [searchText, setSearchText] = useState('')
   const [filteredArticles, setFilteredArticles] = useState([])
   const [tagsSelected, setTagsSelected] = useState('')
+  const [postsData, setPostsData] = useState({})
+
+  function fetchPostsData(url = 'http://localhost:3004') {
+    fetch(url)
+      .then(resp => resp.json())
+      .then(data => {
+        setPostsData(data)
+      })
+  }
+  useEffect(fetchPostsData, [])
+
+
+
+
 
 
 
