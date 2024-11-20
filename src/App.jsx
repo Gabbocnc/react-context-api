@@ -82,12 +82,38 @@ function App() {
   return (
     <div className="container">
 
+      {
+        postsData.data ?
 
+          postsData.data.map(data => (
 
-      <div className="container">
+            <div className="col" key={data.id}>
+              <div className="card bg-secondary mb-3 text-white">
+                <h2 className='mb-3'>
+                  {data.title.toUpperCase()}
+                </h2>
+                <div className='mb-3'>
+                  {data.content}
+                </div>
+                <div>
+                  <img src={data.image} style={{ maxWidth: 300 }} alt="" />
+                </div>
+                <div>
+                  {data.tags.join(',')}
+                </div>
+              </div>
+            </div>
+
+          )) :
+
+          <p>No results yet</p>
+
+      }
+
+      {/*  <div className="container">
         <AppHeader setSearchText={setSearchText} searchText={searchText} />
         <AppMain addArticle={addArticle} newArticle={newArticle} tagsSelected={tagsSelected} hadleSelectedTags={hadleSelectedTags} filteredArticles={filteredArticles} setNewArticle={setNewArticle} handleTrashTaskClick={handleTrashTaskClick} />
-      </div>
+      </div> */}
 
 
 
