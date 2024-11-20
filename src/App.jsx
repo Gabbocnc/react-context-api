@@ -38,6 +38,21 @@ function App() {
   useEffect(fetchPostsData, [])
 
 
+  function fetchDeletePost(slug) {
+    const url = `http://localhost:3004/post/${slug}`;
+
+    fetch(url, {
+      method: 'DELETE',
+    })
+      .then(resp => {
+        console.log('Response:', resp);
+        return resp.json();
+      })
+
+      .then(data => {
+        setPostsData(data);
+      })
+  }
 
 
 
@@ -101,6 +116,7 @@ function App() {
                 <div>
                   {data.tags.join(',')}
                 </div>
+                <button onClick={() => fetchDeletePost(data.slug)}>Elimina</button>
               </div>
             </div>
 
