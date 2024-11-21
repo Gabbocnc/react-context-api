@@ -8,10 +8,10 @@ const initialBlog =
 
 {
   title: '',
-  /* status: '', */
+  status: '',
   image: '/img/0.jpg',
   content: '',
-  tags: [],
+  tags: '',
   slug: ''
 }
 
@@ -20,12 +20,13 @@ const initialBlog =
 
 function App() {
 
-  const [articles, setArticles] = useState(initialBlog)
+  const [postsData, setPostsData] = useState([])
+  /* const [articles, setArticles] = useState(postsData) */
   const [newArticle, setNewArticle] = useState(initialBlog)
   const [searchText, setSearchText] = useState('')
   const [filteredArticles, setFilteredArticles] = useState([])
   const [tagsSelected, setTagsSelected] = useState('')
-  const [postsData, setPostsData] = useState([])
+
 
   function fetchPostsData(url = 'http://localhost:3004') {
     fetch(url)
@@ -59,12 +60,16 @@ function App() {
 
   }
 
+  /*   useEffect(() => {
+      setArticles(postsData);
+    }, [postsData]); */
 
-  /* 
-    useEffect(() => {
-      const filtered = articles.filter((article) => article.name && article.name.toLowerCase().includes(searchText.toLowerCase()))
-      setFilteredArticles(filtered)
-    }, [articles, searchText]) */
+  useEffect(() => {
+    const filtered = postsData.filter((post) =>
+      post.title && post.title.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setFilteredArticles(filtered);
+  }, [postsData, searchText]);
 
 
   function addArticle(e, url = 'http://localhost:3004') {
@@ -92,30 +97,38 @@ function App() {
 
   }
 
-  function handleTrashTaskClick(e) {
-    e.preventDefault()
-
-    const taskIndexToTrash = Number(e.target.getAttribute('data-index'))
-
-    const newArticles = articles.filter((article, index) => index != taskIndexToTrash)
-
-    setArticles(newArticles)
-  }
+  /*  function handleTrashTaskClick(e) {
+     e.preventDefault()
+ 
+     const taskIndexToTrash = Number(e.target.getAttribute('data-index'))
+ 
+     const newArticles = articles.filter((article, index) => index != taskIndexToTrash)
+ 
+     setArticles(newArticles)
+   } */
 
   function hadleSelectedTags(e) {
-    setTagsSelected(e.target.value)
+    setNewArticle({
+      ...newArticle,
+      [e.target.name]: e.target.value
+    })
   }
-
 
 
 
   return (
     <div className="container" >
 
-      {
-        postsData ?
 
-          postsData.map((data, index) => (
+      <div className="container">
+        <AppHeader setSearchText={setSearchText} searchText={searchText} />
+        <AppMain addArticle={addArticle} newArticle={newArticle} tagsSelected={tagsSelected} hadleSelectedTags={hadleSelectedTags} filteredArticles={filteredArticles} setNewArticle={setNewArticle} />
+      </div>
+
+      {
+        filteredArticles ?
+
+          filteredArticles.map((data, index) => (
 
             <div className="col" key={index}>
               <div className="card bg-secondary mb-3 text-white">
@@ -129,7 +142,7 @@ function App() {
                   <img src={data.image} style={{ maxWidth: 300 }} alt="" />
                 </div>
                 <div>
-                  {data.tags.join(',')}
+                  {data.tags}
                 </div>
                 <button onClick={() => fetchDeletePost(data.slug)}>Delete Post</button>
               </div>
@@ -140,12 +153,6 @@ function App() {
           <p>No results yet</p>
 
       }
-
-      <div className="container">
-        <AppHeader setSearchText={setSearchText} searchText={searchText} />
-        <AppMain addArticle={addArticle} newArticle={newArticle} tagsSelected={tagsSelected} hadleSelectedTags={hadleSelectedTags} filteredArticles={filteredArticles} setNewArticle={setNewArticle} handleTrashTaskClick={handleTrashTaskClick} />
-      </div>
-
 
 
 

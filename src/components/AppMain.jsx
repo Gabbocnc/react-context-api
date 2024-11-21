@@ -1,4 +1,4 @@
-export default function AppMain({ addArticle, newArticle, tagsSelected, hadleSelectedTags, filteredArticles, setNewArticle, handleTrashTaskClick }) {
+export default function AppMain({ addArticle, newArticle, tagsSelected, hadleSelectedTags, filteredArticles, setNewArticle, }) {
 
 
     return (
@@ -43,16 +43,16 @@ export default function AppMain({ addArticle, newArticle, tagsSelected, hadleSel
                         <div className="input-group input-group-sm mb-3 mt-3">
                             <select
                                 className="form-select"
-                                value={tagsSelected}
+                                value={newArticle.tags}
                                 onChange={hadleSelectedTags}
                                 name={'tags'}
 
                             >
                                 <option value="" disabled>Choose a Tags</option>
-                                <option>HTML</option>
-                                <option>CSS</option>
-                                <option>JS</option>
-                                <option>Node Express</option>
+                                <option value="html">HTML</option>
+                                <option value="css">CSS</option>
+                                <option value="js">JS</option>
+                                <option value="nodeExpress">Node Express</option>
                             </select>
                         </div>
 
@@ -97,7 +97,7 @@ export default function AppMain({ addArticle, newArticle, tagsSelected, hadleSel
 
             {/* Blog List */}
             <ul className="list-group">
-                {filteredArticles.map((article, index) => (
+                {/* {filteredArticles.map((article, index) => (
                     <li
                         key={index}
                         className="list-group-item d-flex justify-content-between align-items-center"
@@ -110,15 +110,8 @@ export default function AppMain({ addArticle, newArticle, tagsSelected, hadleSel
                             <p><strong>Tags : </strong>{tagsSelected}</p>
                             <p><strong>Status :</strong> {article.status}</p>
                         </div>
-                        <button
-                            onClick={handleTrashTaskClick}
-                            data-index={index}
-                            className="btn btn-danger"
-                        >
-                            <i className="bi bi-trash"></i>
-                        </button>
                     </li>
-                ))}
+                ))} */}
             </ul>
         </main>
     )
