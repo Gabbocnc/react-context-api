@@ -4,18 +4,17 @@ import AppMain from './components/AppMain'
 import AppHeader from './components/AppHeader'
 
 
-const initialBlog = [
+const initialBlog =
 
-  {
-    name: '',
-    status: '',
-    image: '/img/0.jpg',
-    content: '',
-    tags: ''
-  }
+{
+  title: '',
+  /* status: '', */
+  image: '/img/0.jpg',
+  content: '',
+  tags: [],
+  slug: ''
+}
 
-
-]
 
 
 
@@ -26,14 +25,18 @@ function App() {
   const [searchText, setSearchText] = useState('')
   const [filteredArticles, setFilteredArticles] = useState([])
   const [tagsSelected, setTagsSelected] = useState('')
-  const [postsData, setPostsData] = useState({})
+  const [postsData, setPostsData] = useState([])
 
   function fetchPostsData(url = 'http://localhost:3004') {
     fetch(url)
       .then(resp => resp.json())
-      .then(data => {
+      .then(data =>
         setPostsData(data)
-      })
+        //console.log(data);
+
+      )
+    //console.log(postsData);
+
   }
   useEffect(fetchPostsData, [])
 
@@ -45,35 +48,47 @@ function App() {
       method: 'DELETE',
     })
       .then(resp => {
-        console.log('Response:', resp);
+        /*  console.log('Response:', resp); */
         return resp.json();
       })
 
       .then(data => {
         setPostsData(data.data);
       })
+    console.log(postsData);
+
   }
 
 
+  /* 
+    useEffect(() => {
+      const filtered = articles.filter((article) => article.name && article.name.toLowerCase().includes(searchText.toLowerCase()))
+      setFilteredArticles(filtered)
+    }, [articles, searchText]) */
 
 
-
-  useEffect(() => {
-    const filtered = articles.filter((article) => article.name && article.name.toLowerCase().includes(searchText.toLowerCase()))
-    setFilteredArticles(filtered)
-  }, [articles, searchText])
-
-
-  function addArticle(e) {
+  function addArticle(e, url = 'http://localhost:3004') {
     e.preventDefault()
+    const slug = newArticle.title.trim().toLowerCase()
 
-    const newArticles = [
-      newArticle,
-      ...articles
-    ]
-    setArticles(newArticles)
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({
+        ...newArticle,
+        slug
+      }),
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then(resp => {
+        return resp.json();
+      })
 
-    setNewArticle('')
+      .then(data =>
+        setPostsData(data.data)
+      )
+    console.log(postsData);
+
+    setNewArticle(initialBlog)
 
   }
 
@@ -98,14 +113,14 @@ function App() {
     <div className="container" >
 
       {
-        postsData.data ?
+        postsData ?
 
-          postsData.data.map(data => (
+          postsData.map((data, index) => (
 
-            <div className="col" key={data.id}>
+            <div className="col" key={index}>
               <div className="card bg-secondary mb-3 text-white">
                 <h2 className='mb-3'>
-                  {data.title.toUpperCase()}
+                  {data.title}
                 </h2>
                 <div className='mb-3'>
                   {data.content}
@@ -126,10 +141,10 @@ function App() {
 
       }
 
-      {/*  <div className="container">
+      <div className="container">
         <AppHeader setSearchText={setSearchText} searchText={searchText} />
         <AppMain addArticle={addArticle} newArticle={newArticle} tagsSelected={tagsSelected} hadleSelectedTags={hadleSelectedTags} filteredArticles={filteredArticles} setNewArticle={setNewArticle} handleTrashTaskClick={handleTrashTaskClick} />
-      </div> */}
+      </div>
 
 
 

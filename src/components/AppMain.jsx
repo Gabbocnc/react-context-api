@@ -18,9 +18,10 @@ export default function AppMain({ addArticle, newArticle, tagsSelected, hadleSel
                             type="text"
                             className="form-control"
                             placeholder="Blog Name"
-                            value={newArticle.name}
+                            value={newArticle.title}
+                            name='title'
                             onChange={(e) =>
-                                setNewArticle({ ...newArticle, name: e.target.value })
+                                setNewArticle({ ...newArticle, [e.target.name]: e.target.value })
                             }
                         />
 
@@ -30,10 +31,11 @@ export default function AppMain({ addArticle, newArticle, tagsSelected, hadleSel
                             className="form-control"
                             placeholder="Choose your image"
                             accept='image/*'
+                            name={'image'}
                             onChange={(e) => {
                                 const fileImg = e.target.files[0];
                                 const imageUrl = fileImg ? URL.createObjectURL(fileImg) : '/img/0.jpg';
-                                setNewArticle({ ...newArticle, image: imageUrl });
+                                setNewArticle({ ...newArticle, [e.target.name]: imageUrl });
                             }}
                         />
 
@@ -43,6 +45,8 @@ export default function AppMain({ addArticle, newArticle, tagsSelected, hadleSel
                                 className="form-select"
                                 value={tagsSelected}
                                 onChange={hadleSelectedTags}
+                                name={'tags'}
+
                             >
                                 <option value="" disabled>Choose a Tags</option>
                                 <option>HTML</option>
@@ -59,8 +63,9 @@ export default function AppMain({ addArticle, newArticle, tagsSelected, hadleSel
                                 id="status"
                                 className="form-select"
                                 value={newArticle.status}
+                                name={'status'}
                                 onChange={(e) =>
-                                    setNewArticle({ ...newArticle, status: e.target.value })
+                                    setNewArticle({ ...newArticle, [e.target.name]: e.target.value })
                                 }
                             >
                                 <option value="">Select Status</option>
@@ -76,8 +81,9 @@ export default function AppMain({ addArticle, newArticle, tagsSelected, hadleSel
                             className="form-control"
                             placeholder="Blog Content"
                             value={newArticle.content}
+                            name={'content'}
                             onChange={(e) =>
-                                setNewArticle({ ...newArticle, content: e.target.value })
+                                setNewArticle({ ...newArticle, [e.target.name]: e.target.value })
                             }
                         />
 
@@ -97,7 +103,7 @@ export default function AppMain({ addArticle, newArticle, tagsSelected, hadleSel
                         className="list-group-item d-flex justify-content-between align-items-center"
                     >
                         <div>
-                            <h5><strong>Title :</strong> {article.name}</h5>
+                            <h5><strong>Title :</strong> {article.title}</h5>
                             <p><strong>Content :</strong> {article.content}</p>
                             <p className="text-muted">{article.tags}</p>
                             <img src={article.image} style={{ width: "100px" }} />
