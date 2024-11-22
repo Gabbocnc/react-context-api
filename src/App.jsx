@@ -95,10 +95,12 @@ function App() {
 
 
   function hadleSelectedTags(e) {
+    const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+
     setNewArticle({
       ...newArticle,
-      [e.target.name]: e.target.value
-    })
+      [e.target.name]: capitalize(e.target.value),
+    });
   }
 
 
@@ -129,10 +131,13 @@ function App() {
                       {data.content}
                     </div>
                     <div className='mt-3 mb-3'>
-                      <img src={data.image} style={{ maxWidth: 400 }} alt="" />
+                      <img src={data.image} style={{ maxWidth: 400, maxHeight: 300 }} alt="" />
                     </div>
                     <div className='tags'>
                       {data.tags}
+                    </div>
+                    <div className='status'>
+                      <strong>Blog Status : </strong>{data.status}
                     </div>
                     <div className='position-absolute end-0 bottom-0 p-2'>
                       <button className='bg-danger' onClick={() => fetchDeletePost(data.slug)}><i className="bi bi-trash text-white" ></i></button>

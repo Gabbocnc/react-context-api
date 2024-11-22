@@ -62,15 +62,12 @@ export default function AppMain({ addArticle, newArticle, tagsSelected, hadleSel
                                         <input
                                             type="file"
                                             className="form-control"
-                                            placeholder="Choose your image"
                                             accept="image/*"
                                             name="image"
                                             onChange={(e) => {
-                                                const fileImg = e.target.files[0];
-                                                const imageUrl = fileImg
-                                                    ? URL.createObjectURL(fileImg)
-                                                    : "/img/0.jpg";
-                                                setNewArticle({ ...newArticle, [e.target.name]: imageUrl });
+                                                const file = e.target.files[0];
+                                                const imageUrl = file ? URL.createObjectURL(file) : "";
+                                                setNewArticle({ ...newArticle, image: imageUrl });
                                             }}
                                         />
                                     </div>
@@ -91,6 +88,7 @@ export default function AppMain({ addArticle, newArticle, tagsSelected, hadleSel
                                             <option value="css">CSS</option>
                                             <option value="js">JS</option>
                                             <option value="nodeExpress">Node Express</option>
+                                            <option value="react">React</option>
                                         </select>
                                     </div>
 
@@ -101,12 +99,13 @@ export default function AppMain({ addArticle, newArticle, tagsSelected, hadleSel
                                             className="form-select"
                                             value={newArticle.status}
                                             name="status"
-                                            onChange={(e) =>
+                                            onChange={(e) => {
+                                                const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
                                                 setNewArticle({
                                                     ...newArticle,
-                                                    [e.target.name]: e.target.value,
-                                                })
-                                            }
+                                                    [e.target.name]: capitalize(e.target.value),
+                                                });
+                                            }}
                                         >
                                             <option value="">Select Status</option>
                                             <option value="Draft">Private</option>
