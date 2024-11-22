@@ -21,7 +21,6 @@ const initialBlog =
 function App() {
 
   const [postsData, setPostsData] = useState([])
-  /* const [articles, setArticles] = useState(postsData) */
   const [newArticle, setNewArticle] = useState(initialBlog)
   const [searchText, setSearchText] = useState('')
   const [filteredArticles, setFilteredArticles] = useState([])
@@ -60,9 +59,6 @@ function App() {
 
   }
 
-  /*   useEffect(() => {
-      setArticles(postsData);
-    }, [postsData]); */
 
   useEffect(() => {
     const filtered = postsData.filter((post) =>
@@ -97,15 +93,6 @@ function App() {
 
   }
 
-  /*  function handleTrashTaskClick(e) {
-     e.preventDefault()
- 
-     const taskIndexToTrash = Number(e.target.getAttribute('data-index'))
- 
-     const newArticles = articles.filter((article, index) => index != taskIndexToTrash)
- 
-     setArticles(newArticles)
-   } */
 
   function hadleSelectedTags(e) {
     setNewArticle({
@@ -117,7 +104,7 @@ function App() {
 
 
   return (
-    <div className="container" >
+    <div className='bg-dark'>
 
 
       <div className="container">
@@ -125,34 +112,43 @@ function App() {
         <AppMain addArticle={addArticle} newArticle={newArticle} tagsSelected={tagsSelected} hadleSelectedTags={hadleSelectedTags} filteredArticles={filteredArticles} setNewArticle={setNewArticle} />
       </div>
 
-      {
-        filteredArticles ?
 
-          filteredArticles.map((data, index) => (
+      <div className='dflex container bg-dark '>
+        <div className="row">
+          {
+            filteredArticles ?
 
-            <div className="col" key={index}>
-              <div className="card bg-secondary mb-3 text-white">
-                <h2 className='mb-3'>
-                  {data.title}
-                </h2>
-                <div className='mb-3'>
-                  {data.content}
+              filteredArticles.map((data, index) => (
+
+                <div className="col-6 p-3 position-relative" key={index}>
+                  <div className="card bg-secondary mb-3 text-white p-3">
+                    <h2 className='mb-2'>
+                      {data.title}
+                    </h2>
+                    <div>
+                      {data.content}
+                    </div>
+                    <div className='mt-3 mb-3'>
+                      <img src={data.image} style={{ maxWidth: 400 }} alt="" />
+                    </div>
+                    <div className='tags'>
+                      {data.tags}
+                    </div>
+                    <div className='position-absolute end-0 bottom-0 p-2'>
+                      <button className='bg-danger' onClick={() => fetchDeletePost(data.slug)}><i className="bi bi-trash text-white" ></i></button>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <img src={data.image} style={{ maxWidth: 300 }} alt="" />
-                </div>
-                <div>
-                  {data.tags}
-                </div>
-                <button onClick={() => fetchDeletePost(data.slug)}>Delete Post</button>
-              </div>
-            </div>
 
-          )) :
+              )) :
 
-          <p>No results yet</p>
+              <p>No results yet</p>
 
-      }
+          }
+        </div>
+
+      </div>
+
 
 
 

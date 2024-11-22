@@ -7,11 +7,11 @@ export default function AppMain({ addArticle, newArticle, tagsSelected, hadleSel
             {/* New Blog*/}
             <form onSubmit={addArticle}>
                 <div className="mb-3">
-                    <label htmlFor="task" className="form-label">
-                        Blog
+                    <label htmlFor="task" className="form-label text-white">
+                        Blog Input
                     </label>
 
-                    <div className="input-group mb-3">
+                    <div className="input-group mb-3 container">
 
                         {/* BLOG NAME */}
                         <input
@@ -87,7 +87,7 @@ export default function AppMain({ addArticle, newArticle, tagsSelected, hadleSel
                             }
                         />
 
-                        <button className="btn btn-outline-secondary" type="submit">
+                        <button className="btn btn-outline-secondary text-white" type="submit">
                             Add Blog
                         </button>
                     </div>
@@ -97,21 +97,7 @@ export default function AppMain({ addArticle, newArticle, tagsSelected, hadleSel
 
             {/* Blog List */}
             <ul className="list-group">
-                {/* {filteredArticles.map((article, index) => (
-                    <li
-                        key={index}
-                        className="list-group-item d-flex justify-content-between align-items-center"
-                    >
-                        <div>
-                            <h5><strong>Title :</strong> {article.title}</h5>
-                            <p><strong>Content :</strong> {article.content}</p>
-                            <p className="text-muted">{article.tags}</p>
-                            <img src={article.image} style={{ width: "100px" }} />
-                            <p><strong>Tags : </strong>{tagsSelected}</p>
-                            <p><strong>Status :</strong> {article.status}</p>
-                        </div>
-                    </li>
-                ))} */}
+
             </ul>
         </main>
     )
