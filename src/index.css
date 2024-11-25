@@ -45,3 +45,25 @@ nav a:hover {
         list-style: none;
     }
 }
+
+.aboutUs {
+    margin-bottom: 80px;
+    background-color: grey;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+
+    h2 {
+        margin-bottom: 50px;
+    }
+
+}
+
+article p {
+    margin-bottom: 1em;
+    text-align: justify;
+    font-size: 16px;
+    line-height: 1.4;
+
+}
