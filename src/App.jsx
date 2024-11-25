@@ -2,6 +2,10 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import AppMain from './components/AppMain'
 import AppHeader from './components/AppHeader'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Home from './pages/Home'
+import Contact from './pages/Contact'
+import About from './pages/About'
 
 
 const initialBlog =
@@ -109,6 +113,21 @@ function App() {
     <div className='bg-dark'>
 
 
+      <BrowserRouter>
+
+        {/* rotte */}
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+
+      </BrowserRouter >
+
+
+
+
       <div className="container">
         <AppHeader setSearchText={setSearchText} searchText={searchText} />
         <AppMain addArticle={addArticle} newArticle={newArticle} tagsSelected={tagsSelected} hadleSelectedTags={hadleSelectedTags} filteredArticles={filteredArticles} setNewArticle={setNewArticle} />
@@ -157,7 +176,7 @@ function App() {
 
 
 
-    </div>
+    </div >
   );
 }
 
