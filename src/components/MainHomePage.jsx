@@ -5,7 +5,7 @@ export default function MainMenu() {
         <nav>
             <NavLink to="/">Home</NavLink>
             <NavLink to="/about">About</NavLink>
-            <NavLink to="/contact">Contact</NavLink>
+            <NavLink to="/contact">Contacts</NavLink>
         </nav>
     )
 }
