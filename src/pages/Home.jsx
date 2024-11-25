@@ -1,14 +1,10 @@
-
+import MainHomePage from "../components/MainHomePage"
 
 export default function Home() {
     return (
         <>
             <header className="container">
-                <nav>
-                    <a href="/">Home</a>
-                    <a href="/contact">Contact</a>
-                    <a href="/about">About</a>
-                </nav>
+                <MainHomePage />
             </header>
 
             <main>
