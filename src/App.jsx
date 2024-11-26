@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import AppMain from './components/AppMain'
 import AppHeader from './components/AppHeader'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
 import Home from './pages/Home'
 import Contact from './pages/Contact'
 import About from './pages/About'
@@ -22,11 +22,11 @@ const initialBlog =
 
 function App() {
 
+  const navigate = useNavigate()
   const [postsData, setPostsData] = useState([])
   const [filteredArticles, setFilteredArticles] = useState([])
   const [newArticle, setNewArticle] = useState(initialBlog)
   const [searchText, setSearchText] = useState('')
-
   const [tagsSelected, setTagsSelected] = useState('')
 
 
@@ -46,6 +46,7 @@ function App() {
 
   function fetchDeletePost(slug) {
     const url = `http://localhost:3004/${slug}`;
+
 
     fetch(url, {
       method: 'DELETE',
@@ -158,6 +159,12 @@ function App() {
                               <div className="position-absolute end-0 bottom-0 p-2">
                                 <button className="bg-danger" onClick={() => fetchDeletePost(data.slug)}>
                                   <i className="bi bi-trash text-white"></i>
+                                  <button
+                                    className="btn btn-dark text-white"
+                                    onClick={() => navigate(data.slug)}
+                                  >
+                                    Go to Post
+                                  </button>
                                 </button>
                               </div>
                             </div>
@@ -165,6 +172,7 @@ function App() {
                         )) :
                         <p>No results yet</p>
                     }
+
                   </div>
                 </div>
               </div>
