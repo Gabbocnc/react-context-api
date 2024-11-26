@@ -1,4 +1,4 @@
-import Home from '../pages/Home'
+import MainHomePage from "../components/MainHomePage"
 
 export default function AppMain({ addArticle, newArticle, tagsSelected, hadleSelectedTags, filteredArticles, setNewArticle, }) {
 
@@ -7,7 +7,9 @@ export default function AppMain({ addArticle, newArticle, tagsSelected, hadleSel
         <main>
 
             <div>
-                <Home />
+                <div className="container">
+                    <MainHomePage />
+                </div>
                 {/* Menu Toggle Button */}
                 <button
                     className="btn btn-primary"

@@ -1,8 +1,12 @@
-import Home from './Home'
+import MainMenu from '../components/MainHomePage'
+
 export default function Contact() {
     return (
         <>
-            <Home />
+            <div className="container">
+                <h1>My Blog</h1>
+                <MainMenu />
+            </div>
             <div className="contact container">
 
                 <h3>Contattaci qui :</h3>

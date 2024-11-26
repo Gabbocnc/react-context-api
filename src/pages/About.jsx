@@ -1,8 +1,11 @@
-import Home from "./Home"
+import MainMenu from "../components/MainHomePage"
 export default function About() {
     return (
         <>
-            <Home />
+            <div className="container">
+                <h1>My Blog</h1>
+                <MainMenu />
+            </div>
             <div className="container aboutUs">
                 <h2>Benvenuti su MYBLOG.</h2>
                 <article>

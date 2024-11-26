@@ -13,8 +13,14 @@ nav {
 }
 
 nav a {
+    margin-right: 30px;
     color: #fff;
-    padding: 10px;
+    background-color: #007bff;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s;
 
 }
 

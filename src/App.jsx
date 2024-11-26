@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Contact from './pages/Contact'
 import About from './pages/About'
+import BlogDetails from './pages/BlogDetails'
 
 
 const initialBlog =
@@ -119,7 +120,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
-          <Route path="/Blog" element={
+          <Route path="/blog" element={
             <div className="dflex container bg-dark">
 
 
@@ -169,15 +170,11 @@ function App() {
               </div>
             </div>
           } />
+          <Route path="/blog/:slug" element={<BlogDetails />} />
         </Routes>
-        <Route path="/Blog/:slug" element={<BlogDetails />} />
 
 
       </BrowserRouter >
-
-
-
-
 
     </div >
   );
