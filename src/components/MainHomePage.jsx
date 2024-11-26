@@ -6,6 +6,7 @@ export default function MainMenu() {
             <NavLink to="/">Home</NavLink>
             <NavLink to="/about">About</NavLink>
             <NavLink to="/contact">Contacts</NavLink>
+            <NavLink to='/blog'>Blog</NavLink>
         </nav>
     )
 }

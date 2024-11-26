@@ -1,9 +1,13 @@
+import Home from '../pages/Home'
+
 export default function AppMain({ addArticle, newArticle, tagsSelected, hadleSelectedTags, filteredArticles, setNewArticle, }) {
 
 
     return (
         <main>
+
             <div>
+                <Home />
                 {/* Menu Toggle Button */}
                 <button
                     className="btn btn-primary"

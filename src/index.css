@@ -4,9 +4,6 @@
     color: white;
 }
 
-* {
-    position: relative;
-}
 
 nav {
     font-size: 1rem;
@@ -26,8 +23,6 @@ nav a:hover {
 }
 
 .contact {
-    position: absolute;
-    top: 0;
     padding: 25px;
     max-width: 300px;
 
