@@ -1,8 +1,9 @@
+
 import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route, useNavigate, Link } from 'react-router-dom'
 import './App.css'
 import AppMain from './components/AppMain'
 import AppHeader from './components/AppHeader'
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
 import Home from './pages/Home'
 import Contact from './pages/Contact'
 import About from './pages/About'
@@ -22,7 +23,7 @@ const initialBlog =
 
 function App() {
 
-  const navigate = useNavigate()
+
   const [postsData, setPostsData] = useState([])
   const [filteredArticles, setFilteredArticles] = useState([])
   const [newArticle, setNewArticle] = useState(initialBlog)
@@ -119,8 +120,14 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
+
+
           <Route path="/contact" element={<Contact />} />
+
+
           <Route path="/about" element={<About />} />
+
+
           <Route path="/blog" element={
             <div className="dflex container bg-dark">
 
@@ -159,26 +166,24 @@ function App() {
                               <div className="position-absolute end-0 bottom-0 p-2">
                                 <button className="bg-danger" onClick={() => fetchDeletePost(data.slug)}>
                                   <i className="bi bi-trash text-white"></i>
-                                  <button
-                                    className="btn btn-dark text-white"
-                                    onClick={() => navigate(data.slug)}
-                                  >
-                                    Go to Post
-                                  </button>
                                 </button>
+                                <Link className='btn btn-dark m-2' to={data.slug}>Go to Post</Link>
                               </div>
                             </div>
                           </div>
                         )) :
                         <p>No results yet</p>
                     }
-
                   </div>
                 </div>
               </div>
             </div>
           } />
+
+
           <Route path="/blog/:slug" element={<BlogDetails />} />
+
+
         </Routes>
 
 

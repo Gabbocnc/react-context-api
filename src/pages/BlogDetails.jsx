@@ -1,8 +1,7 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from 'react'
 
 export default function BlogDetails() {
-    const navigate = useNavigate()
     const [blog, setBlog] = useState(null)
     const [allBlogs, setAllBlogs] = useState([])
     const { slug } = useParams()
@@ -35,10 +34,6 @@ export default function BlogDetails() {
         [])
 
 
-
-
-
-
     return (
 
         <>
@@ -61,12 +56,7 @@ export default function BlogDetails() {
                                     </div>
                                 </div>
                             </div>
-                            <button
-                                className="btn btn-dark text-white"
-                                onClick={() => navigate(blog.slug)}
-                            >
-                                PREVIOUS
-                            </button>
+
                         </div>
                     </section>
                 ) : (
