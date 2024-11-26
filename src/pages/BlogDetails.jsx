@@ -41,13 +41,11 @@ export default function BlogDetails() {
 
             {
                 blog ? (
-                    <section className="pizza_details">
+                    <section className="blog_details">
                         <div className="container">
                             <div className="row">
                                 <div className="col">
-                                    <div className="card border-0 rounded-4 shadow-lg">
-                                        <img className="card-img-top rounded-4" src={`http://localhost:3004/${blog.image}`} alt="" />
-                                    </div>
+                                    <img src={blog.image} alt="" />
                                 </div>
                                 <div className="col">
                                     <h3>{blog.title}</h3>
