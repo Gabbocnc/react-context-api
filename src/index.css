@@ -14,7 +14,7 @@ nav {
 
 nav a {
     margin-right: 30px;
-    color: #fff;
+    color: #ffffff;
     background-color: #007bff;
     padding: 10px 20px;
     border-radius: 25px;
@@ -35,6 +35,7 @@ nav a:hover {
     i {
         margin-right: 10px;
         margin-left: 10px;
+        color: white;
     }
 
     a {
@@ -44,6 +45,10 @@ nav a:hover {
     li {
         margin-bottom: 10px;
         list-style: none;
+    }
+
+    h3 {
+        color: white;
     }
 }
 
@@ -67,4 +72,10 @@ article p {
     font-size: 16px;
     line-height: 1.4;
 
+}
+
+.container {
+    h1 {
+        color: white;
+    }
 }
