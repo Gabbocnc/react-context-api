@@ -149,7 +149,6 @@ function App() {
                     setNewArticle={setNewArticle}
                   />
                 </div>
-                {/* rotta per tutti i Blog */}
                 <div className="col-12">
                   <BlogList filteredArticles={filteredArticles} fetchDeletePost={fetchDeletePost} />
                 </div>
