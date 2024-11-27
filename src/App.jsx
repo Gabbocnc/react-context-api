@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import Contact from './pages/Contact'
 import About from './pages/About'
 import BlogDetails from './pages/BlogDetails'
+import BlogList from './components/BlogList'
 
 
 const initialBlog =
@@ -148,7 +149,8 @@ function App() {
                   />
                 </div>
                 <div className="col-12">
-                  <div className="row">
+                  <BlogList filteredArticles={filteredArticles} fetchDeletePost={fetchDeletePost} />
+                  {/* <div className="row">
                     {
                       filteredArticles ?
                         filteredArticles.map((data, index) => (
@@ -174,7 +176,7 @@ function App() {
                         )) :
                         <p>No results yet</p>
                     }
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
