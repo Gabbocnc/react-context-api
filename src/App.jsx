@@ -9,6 +9,7 @@ import Contact from './pages/Contact'
 import About from './pages/About'
 import BlogDetails from './pages/BlogDetails'
 import BlogList from './components/BlogList'
+import GlobalContext from './context/GlobalContext'
 
 
 const initialBlog =
@@ -112,60 +113,64 @@ function App() {
 
 
   return (
-    <div className='bg-dark'>
+    <GlobalContext.Provider value={{ BlogList }}>
+
+      <div className='bg-dark'>
 
 
-      <BrowserRouter>
+        <BrowserRouter>
 
-        {/* rotte */}
+          {/* rotte */}
 
-        <Routes>
-          {/* rotta home page */}
-          <Route path="/" element={<Home />} />
+          <Routes>
+            {/* rotta home page */}
+            <Route path="/" element={<Home />} />
 
-          {/* rotta contatti */}
-          <Route path="/contact" element={<Contact />} />
+            {/* rotta contatti */}
+            <Route path="/contact" element={<Contact />} />
 
-          {/* rotta about */}
-          <Route path="/about" element={<About />} />
+            {/* rotta about */}
+            <Route path="/about" element={<About />} />
 
-          {/* rotta per i blog  */}
-          <Route path="/blog" element={
-            <div className="dflex container bg-dark">
+            {/* rotta per i blog  */}
+            <Route path="/blog" element={
+              <div className="dflex container bg-dark">
 
 
-              <div className="row">
+                <div className="row">
 
-                <div className="col-12">
-                  <div className="container">
-                    <AppHeader setSearchText={setSearchText} searchText={searchText} />
+                  <div className="col-12">
+                    <div className="container">
+                      <AppHeader setSearchText={setSearchText} searchText={searchText} />
+                    </div>
+                    <AppMain
+                      addArticle={addArticle}
+                      newArticle={newArticle}
+                      tagsSelected={tagsSelected}
+                      hadleSelectedTags={hadleSelectedTags}
+                      filteredArticles={filteredArticles}
+                      setNewArticle={setNewArticle}
+                    />
                   </div>
-                  <AppMain
-                    addArticle={addArticle}
-                    newArticle={newArticle}
-                    tagsSelected={tagsSelected}
-                    hadleSelectedTags={hadleSelectedTags}
-                    filteredArticles={filteredArticles}
-                    setNewArticle={setNewArticle}
-                  />
-                </div>
-                <div className="col-12">
-                  <BlogList filteredArticles={filteredArticles} fetchDeletePost={fetchDeletePost} />
+                  <div className="col-12">
+                    <BlogList filteredArticles={filteredArticles} fetchDeletePost={fetchDeletePost} />
+                  </div>
                 </div>
               </div>
-            </div>
-          } />
+            } />
 
-          {/* rotta per visualizzare singolo blog */}
-          <Route path="/blog/:slug" element={<BlogDetails />} />
-
-
-        </Routes>
+            {/* rotta per visualizzare singolo blog */}
+            <Route path="/blog/:slug" element={<BlogDetails />} />
 
 
-      </BrowserRouter >
+          </Routes>
 
-    </div >
+
+        </BrowserRouter >
+
+      </div >
+
+    </GlobalContext.Provider>
   );
 }
 
